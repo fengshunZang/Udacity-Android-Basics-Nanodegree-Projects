@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BestSushiBar</string>
+    <string name="header_text">SUSHI ST-DENIS</string>
+    <string name="phone">Phone: (514)282-9898</string>
+    <string name="email">Email: reservation@sushistdenis.ca</string>
+    <string name="web">Web: www.sotasushi.ca</string>
+    <string name="address">Address:\n 1669 St-Denis \n Montréal Qc \n H2X 3K4 </string>
+    <string name="description">Are you also looking for the secret of supreme tastes? Go to Sushi St.Denis for an exceptional experience, in particular for the reputable. There they ensure you that the foods are fresh as ingredients are daily purchased, prepared and consumed upon clients’ orders.</string>
+</resources>
