@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Quiz App</string>
+    <string name="header">Basic Physical Concepts</string>
+    <string name="button1_content">Submit</string>
+    <string name="button2_content">Hint</string>
+    <string name="quiz1">Q1: The atomic number of an element is determined by</string>
+    <string name="quiz2">Q2:  A molecule</string>
+    <string name="quiz3">Q3: If a material has low resistance, then</string>
+    <string name="quiz4">Q4: The volt is the standard unit of</string>
+    <string name="quiz5">Q5: A fluctuating magnetic field</string>
+    <string name="quiz1item1">A.The number of neutrons.</string>
+    <string name="quiz1item2">B.The number of protons.</string>
+    <string name="quiz1item3">C.The number of neutrons plus the number of protons.</string>
+    <string name="quiz1item4">D.The number of electrons.</string>
+    <string name="quiz2item1">A.Can consist of a single atom of an element.</string>
+    <string name="quiz2item2">B.Always contains two or more elements.</string>
+    <string name="quiz2item3">C.Always has two or more atoms.</string>
+    <string name="quiz2item4">D.Is always electrically charged.</string>
+    <string name="quiz3item1">A.It is a good conductor.</string>
+    <string name="quiz3item2">B.It is a poor conductor.</string>
+    <string name="quiz3item3">C.The current flows mainly in the form of holes.</string>
+    <string name="quiz3item4">D.Current can flow only in one direction.</string>
+    <string name="quiz4item1">A.Current.</string>
+    <string name="quiz4item2">B.Charge.</string>
+    <string name="quiz4item3">C.Electromotice force.</string>
+    <string name="quiz4item4">D.Resitance.</string>
+    <string name="quiz5item1">A.Produces an electric current in an insulator.</string>
+    <string name="quiz5item2">B.Magnetizes the earth.</string>
+    <string name="quiz5item3">C.Produces a fluctuating electric field.</string>
+    <string name="quiz5item4">D.Results from a steady electric current.</string>
+</resources>

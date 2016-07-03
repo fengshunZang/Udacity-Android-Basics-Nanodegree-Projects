@@ -1,0 +1,22 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#673AB7</item>
+        <item name="colorPrimaryDark">#512DA8</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="quiz_text">
+        <item name = "android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="quiz_item_text">
+        <item name="android:textColor">@android:color/holo_blue_dark</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+</resources>
