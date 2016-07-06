@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Music App</string>
+    <string name="button_search">Search</string>
+    <string name="text_search">Search</string>
+    <string name="button_music_store">Music Store</string>
+    <string name="text_music_store">Music Store</string>
+    <string name="button_music_list">My Music List</string>
+    <string name="text_music_list">My Music List</string>
+    <string name="button_play">PLAY</string>
+    <string name="text_play">PLAY</string>
+    <string name="button_detail">For More Details</string>
+    <string name="text_detail">For More Details</string>
+    <string name="button_discover">Discover in Music World</string>
+    <string name="text_discover">Discover in Music World</string>
+    <string name="music1">Music 1</string>
+    <string name="music2">Music 2</string>
+    <string name="music3">Music 3</string>
+    <string name="music4">Music 4</string>
+    <string name="music5">Music 5</string>
+    <string name="description_main">The main interface provides daily random music feeds.
+        You can search or discover in more music themes. And you can play your favorite music from your own list.</string>
+    <string name="description_discovery">Discovery Results \n are shown here: </string>
+    <string name="description_search">Search Results \n are shown here: </string>
+    <string name="description_now_playing">The music now is playing... </string>
+    <string name="description_store">You can buy selected music from Music Store.</string>
+    <string name="button_add_to_my_list">add to my list</string>
+    <string name="button_play_now">play now</string>
+    <string name="button_buy">Buy</string>
+    <string name="button_back">Back to Library</string>
+</resources>
