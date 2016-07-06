@@ -8,3 +8,6 @@ Design and implement an app to track scores between two teams within a basketbal
 
 #Project 3 Quiz App
 Design and implement a short quiz app about some topic you are familiar with.
+
+#Project 4 Music App
+Create the structure of an app to play music for a user and build it out.
