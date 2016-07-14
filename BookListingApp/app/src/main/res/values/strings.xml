@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Book Listing App</string>
+    <string name="result_activity_label">Search Result</string>
+    <string name="initial_display">Please type one single keyword in the following area:</string>
+    <string name="No_internet">Sorry, no network connection available. Please check your internet environment and try again.</string>
+    <string name="No_result_found">No corresponding results are found, please try again.</string>
+    <string name="hint">Input here.</string>
+    <string name="BUTTON_NAME">search</string>
+</resources>
