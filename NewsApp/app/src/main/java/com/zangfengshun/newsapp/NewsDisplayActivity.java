@@ -12,6 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 
@@ -49,17 +52,23 @@ public class NewsDisplayActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View listItemView = convertView;
+            ViewHolder holder;
             if (listItemView == null) {
                 listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
+                holder = new ViewHolder();
+                holder.newsTitle = (TextView)listItemView.findViewById(R.id.news_title);
+                holder.newsDate = (TextView)listItemView.findViewById(R.id.news_date);
+                listItemView.setTag(holder);
             }
-            NewsItem currentNewsItem = getItem(position);
-            TextView newsTitle = (TextView) listItemView.findViewById(R.id.news_title);
-            newsTitle.setText(currentNewsItem.getTitle());
-
-            TextView newsDate = (TextView) listItemView.findViewById(R.id.news_date);
-            newsDate.setText(currentNewsItem.getPublicationDate());
-
+            holder = (ViewHolder) listItemView.getTag();
+            holder.newsTitle.setText(getItem(position).getTitle());
+            holder.newsDate.setText(getItem(position).getPublicationDate());
             return listItemView;
         }
+    }
+
+    static class ViewHolder {
+        TextView newsTitle;
+        TextView newsDate;
     }
 }
