@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">News App</string>
+    <string name="news_display_activity_name">News Display</string>
+    <string name="button1_name">politics</string>
+    <string name="button2_name">business</string>
+    <string name="button3_name">tech</string>
+    <string name="button4_name">health</string>
+    <string name="button5_name">entertainment</string>
+    <string name="No_internet_connection">No internet connection, please check your net and try again.</string>
+    <string name="initial_display">Welcome to News App,\n Please select a topic you are interested in!</string>
+
+
+</resources>
