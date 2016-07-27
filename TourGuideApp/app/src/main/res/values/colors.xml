@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBackground">#FBE9E7</color>
+    <color name="attraction">#EF5350</color>
+    <color name="restaurant">#AB47BC</color>
+    <color name="hotel">#9CCC65</color>
+    <color name="event">#29B6F6</color>
+
+</resources>
