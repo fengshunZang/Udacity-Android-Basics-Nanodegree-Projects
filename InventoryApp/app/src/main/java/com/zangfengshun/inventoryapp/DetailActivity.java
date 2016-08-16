@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,15 +23,15 @@ import java.io.FileDescriptor;
 import java.io.IOException;
 
 public class DetailActivity extends AppCompatActivity {
-    private ProductDbHelper mDbHelper;
+    private static final String LOG_TAG = DetailActivity.class.getSimpleName();
+    private ProductDbHelper mDbHelper = new ProductDbHelper(this);;
     private Product mProduct;
-    private static final String TAG = "DetailActivity";
 
-    TextView nameDetail = (TextView)findViewById(R.id.name_detail);
-    TextView priceDetail = (TextView)findViewById(R.id.price_detail);
-    TextView currentQuantityDetail = (TextView)findViewById(R.id.current_quantity_detail);
-    TextView saleQuantityDetail = (TextView)findViewById(R.id.sale_quantity_detail);
-    ImageView imageView = (ImageView)findViewById(R.id.imageView_product);
+    private TextView nameDetail;
+    private TextView priceDetail;
+    private TextView currentQuantityDetail;
+    private TextView saleQuantityDetail;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +39,15 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         Intent intent = getIntent();
-        Product productItem = intent.getParcelableExtra("item_info");
+        Log.v(LOG_TAG, "Received intent");
 
-        mProduct = productItem;
-        mDbHelper = new ProductDbHelper(this);
+        mProduct = intent.getParcelableExtra("item_info");
+
+        nameDetail = (TextView)findViewById(R.id.name_detail);
+        priceDetail = (TextView)findViewById(R.id.price_detail);
+        currentQuantityDetail = (TextView)findViewById(R.id.current_quantity_detail);
+        saleQuantityDetail = (TextView)findViewById(R.id.sale_quantity_detail);
+        imageView = (ImageView)findViewById(R.id.imageView_product);
 
         display(mProduct);
 
@@ -63,7 +69,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mDbHelper.updateProductQuantityAfterReceiving(mProduct , 1);
-                mProduct.setCurrentQuantity(mProduct.getCurrentQuantity() - 1);
+                mProduct.setCurrentQuantity(mProduct.getCurrentQuantity() + 1);
                 display(mProduct);
             }
         });
@@ -85,7 +91,8 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mDbHelper.deleteProduct(mProduct);
-                startActivity(new Intent(DetailActivity.this, MainActivity.class));
+                setResult(RESULT_OK, new Intent(DetailActivity.this, MainActivity.class));
+                finish();
             }
         });
     }
@@ -95,25 +102,39 @@ public class DetailActivity extends AppCompatActivity {
 
         priceDetail.setText(String.valueOf(product.getPrice()));
 
-        currentQuantityDetail.setText(product.getCurrentQuantity());
+        currentQuantityDetail.setText(String.valueOf(product.getCurrentQuantity()));
 
-        saleQuantityDetail.setText(product.getSaleQuantity());
+        saleQuantityDetail.setText(String.valueOf(product.getSaleQuantity()));
 
-        Uri uriFromPath = Uri.fromFile(new File(product.getImageLink()));
-        imageView.setImageBitmap(getBitmapFromUri(uriFromPath));
+       // imageView.setImageResource(R.mipmap.ic_launcher);
+        Bitmap selectedImage = getBitmapFromUri(Uri.parse(product.getImageLink()));
+        Log.v(LOG_TAG, product.getImageLink());
+        if (selectedImage != null) {
+            imageView.setImageBitmap(selectedImage);
+        }
+        
+//        try {
+//            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uriFromPath);
+//            // Log.d(TAG, String.valueOf(bitmap));
+//
+//            // ImageView imageView = (ImageView) findViewById(R.id.imageView);
+//            imageView.setImageBitmap(bitmap);
+//        } catch (IOException e) {
+//            Log.v(LOG_TAG, e.toString());
+//        }
+
     }
 
     private Bitmap getBitmapFromUri(Uri uri) {
         ParcelFileDescriptor parcelFileDescriptor = null;
         try {
-            parcelFileDescriptor =
-                    getContentResolver().openFileDescriptor(uri, "r");
+            parcelFileDescriptor = this.getContentResolver().openFileDescriptor(uri, "r");
             FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
             Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
             parcelFileDescriptor.close();
             return image;
         } catch (Exception e) {
-            Log.e(TAG, "Failed to load image.", e);
+            Log.v(LOG_TAG, "Failed to load image.", e);
             return null;
         } finally {
             try {
@@ -122,7 +143,7 @@ public class DetailActivity extends AppCompatActivity {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                Log.e(TAG, "Error closing ParcelFile Descriptor");
+                Log.v(LOG_TAG, "Error closing ParcelFile Descriptor");
             }
         }
     }

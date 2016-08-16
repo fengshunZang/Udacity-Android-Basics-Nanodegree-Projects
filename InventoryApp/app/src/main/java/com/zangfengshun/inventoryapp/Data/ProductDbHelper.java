@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
  * Created by Zang on 2016-08-04.
  */
 public class ProductDbHelper extends SQLiteOpenHelper {
+    private static final String LOG_TAG = ProductDbHelper.class.getSimpleName();
     // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "InventoryApp.db";
@@ -21,10 +23,10 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     private static final String TEXT_TYPE = " TEXT";
     private static final String INTEGER_TYPE = " INTEGER";
     private static final String REAL_TYPE = " REAL";
-    private static final String COMMA_SEP = ",";
+    private static final String COMMA_SEP = ", ";
     private static final String SQL_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " +
             ProductContract.ProductEntry.TABLE_NAME + " (" +
-            ProductContract.ProductEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            ProductContract.ProductEntry._ID + " INTEGER PRIMARY KEY, " +
             ProductContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME + TEXT_TYPE + COMMA_SEP +
             ProductContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE + REAL_TYPE + COMMA_SEP +
             ProductContract.ProductEntry.COLUMN_NAME_PRODUCT_CURRENT_QUANTITY + INTEGER_TYPE + COMMA_SEP +
@@ -101,11 +103,17 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(SQL_QUERY_ALL_ITEMS, null);
 
         if (cursor.moveToFirst()) {
-            while (cursor.moveToNext()) {
+            do {
+                //Log.v(LOG_TAG, cursor.getString(1));
+//                Log.v(LOG_TAG, String.valueOf(cursor.getDouble(2)));
+//                Log.v(LOG_TAG, String.valueOf(cursor.getInt(3)));
+//                Log.v(LOG_TAG, String.valueOf(cursor.getInt(4)));
+//                Log.v(LOG_TAG, cursor.getString(5));
+//                Log.v(LOG_TAG, cursor.getString(6));
                 Product product = new Product(cursor.getString(1), cursor.getDouble(2), cursor.getInt(3),
                         cursor.getInt(4), cursor.getString(5), cursor.getString(6));
                 productsList.add(product);
-            }
+            } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();

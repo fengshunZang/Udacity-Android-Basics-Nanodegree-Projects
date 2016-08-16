@@ -38,11 +38,10 @@ public class ProductListAdapter extends ArrayAdapter<Product>{
         price.setText(String.valueOf(currentProduct.getPrice()));
 
         TextView currentQuantity = (TextView)listView.findViewById(R.id.current_quantity_list_item);
-        currentQuantity.setText(currentProduct.getCurrentQuantity());
+        currentQuantity.setText(String.valueOf(currentProduct.getCurrentQuantity()));
 
-        int saleQ = currentProduct.getSaleQuantity();
         TextView saleQuantity = (TextView)listView.findViewById(R.id.sale_quantity_list_item);
-        saleQuantity.setText(saleQ);
+        saleQuantity.setText(String.valueOf(currentProduct.getSaleQuantity()));
 
         return listView;
     }

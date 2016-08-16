@@ -1,5 +1,6 @@
 package com.zangfengshun.inventoryapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.stetho.DumperPluginsProvider;
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.dumpapp.DumperPlugin;
 import com.zangfengshun.inventoryapp.Data.Product;
 import com.zangfengshun.inventoryapp.Data.ProductDbHelper;
 import com.zangfengshun.inventoryapp.Data.ProductListAdapter;
@@ -31,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Set adapter to the listView;
         mListView = (ListView)findViewById(R.id.list_view);
-        mAdapter = new ProductListAdapter(this, mProductsList);
+        mAdapter = new ProductListAdapter(MainActivity.this, mProductsList);
         mListView.setAdapter(mAdapter);
 
         mDisplayMsg = (TextView)findViewById(R.id.display_message);
@@ -45,11 +49,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mProductsList.addAll(mDbHelper.queryAllEntries());
-
-        for (Product p: mProductsList) {
-            Log.v(LOG_TAG, p.getName() + " initializing");
-        }
-
         mAdapter.notifyDataSetChanged();
 
         //Handle list item click event.
@@ -57,8 +56,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Product item = mAdapter.getItem(position);
-                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                 intent.putExtra("item_info", item);
+                Log.v(LOG_TAG, "Intent already sent");
                 startActivityForResult(intent, 0);
             }
         });
@@ -69,16 +69,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddProductActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
             }
         });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (mListView.getVisibility() == View.GONE) {
+            mListView.setVisibility(View.VISIBLE);
+            mDisplayMsg.setVisibility(View.GONE);
+        }
+
         mAdapter.clear();
         mProductsList.clear();
         mProductsList.addAll(mDbHelper.queryAllEntries());
+        Log.v(LOG_TAG, "returning from add product activity.");
 
         for (Product p: mProductsList) {
             Log.v(LOG_TAG, p.getName());

@@ -28,12 +28,8 @@ public class Product implements Parcelable {
         return mName;
     }
 
-    public String getSupplierEmail() {
-        return mSupplierEmail;
-    }
-
-    public String getImageLink() {
-        return mImageLink;
+    public double getPrice() {
+        return mPrice;
     }
 
     public int getCurrentQuantity() {
@@ -44,9 +40,14 @@ public class Product implements Parcelable {
         return mSaleQuantity;
     }
 
-    public double getPrice() {
-        return mPrice;
+    public String getImageLink() {
+        return mImageLink;
     }
+
+    public String getSupplierEmail() {
+        return mSupplierEmail;
+    }
+
 
     public void setName(String mName) {
         this.mName = mName;
@@ -80,9 +81,8 @@ public class Product implements Parcelable {
     public static final Parcelable.Creator<Product> CREATOR = new Creator<Product>() {
         @Override
         public Product createFromParcel(Parcel source) {
-            Product product = new Product(source.readString(), source.readDouble(),
+            return new Product(source.readString(), source.readDouble(),
                     source.readInt(), source.readInt(), source.readString(), source.readString());
-            return product;
         }
 
         @Override

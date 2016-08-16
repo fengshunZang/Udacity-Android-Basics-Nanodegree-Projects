@@ -32,6 +32,7 @@ public class AddProductActivity extends AppCompatActivity {
     private String mImageLink;
     private String mEmail;
     private int PICK_IMAGE_REQUEST = 1;
+    private static final String LOG_TAG = "AddProductActivity";
 
     private EditText name;
     private EditText price;
@@ -66,7 +67,7 @@ public class AddProductActivity extends AppCompatActivity {
                     intent.addCategory(Intent.CATEGORY_OPENABLE);
                 }
 
-                checkWriteToExternalPerms();
+                //checkWriteToExternalPerms();
                 intent.setType("image/*");
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
                 Log.v("AddProductActivity", "get image");
@@ -74,7 +75,6 @@ public class AddProductActivity extends AppCompatActivity {
             }
         });
 
-        Log.v("AddProductActivity", "what happened2");
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,16 +83,20 @@ public class AddProductActivity extends AppCompatActivity {
                 mCurrentQuantity = Integer.valueOf(currentQuantity.getText().toString());
                 mSaleQuantity = Integer.valueOf(saleQuantity.getText().toString());
                 mEmail = supplierEmail.getText().toString();
-                mImageLink = "dummy link";
                 mProduct = new Product(mName, mPrice, mCurrentQuantity, mSaleQuantity, mImageLink, mEmail);
-                if (mProduct.getImageLink() == null) {
-                    Toast toast = Toast.makeText(AddProductActivity.this, "Please add image.", Toast.LENGTH_SHORT);
-                    toast.show();
-                    mDbHelper.addProductEntry(mProduct);
-                } else {
-                    mDbHelper.addProductEntry(mProduct);
-                }
-                startActivity(new Intent(AddProductActivity.this, MainActivity.class));
+
+                Log.v(LOG_TAG, "Prepare to set data to a product object");
+
+//                if (mProduct.getImageLink() == null) {
+//                    Toast toast = Toast.makeText(AddProductActivity.this, "Please add image.", Toast.LENGTH_SHORT);
+//                    toast.show();
+//                    mDbHelper.addProductEntry(mProduct);
+//                } else {
+//                    mDbHelper.addProductEntry(mProduct);
+//                }
+                mDbHelper.addProductEntry(mProduct);
+                setResult(RESULT_OK, new Intent());
+                finish();
             }
         });
 
@@ -114,23 +118,31 @@ public class AddProductActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int reqCode, int resCode, Intent data) {
-        super.onActivityResult(reqCode, resCode, data);
+
+        Log.v(LOG_TAG, "received image data");
 
         if (resCode == RESULT_OK && reqCode == PICK_IMAGE_REQUEST && data != null && data.getData() != null) {
-            String selectedImagePath;
+            String selectedImagePath = null;
             Uri selectedImageUri = data.getData();
+            Log.v(LOG_TAG, "received image uri");
 
-            String[] projection = {MediaStore.Images.Media.DATA};
-
-            Cursor cursor = getContentResolver().query(selectedImageUri, projection, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(projection[0]);
-            selectedImagePath = cursor.getString(columnIndex);
-            cursor.close();
-
-            Log.v("AddProductActivity", selectedImagePath);
-            mImageLink = selectedImagePath;
+//            String[] projection = {MediaStore.Images.Media.DATA};
+//
+//            Cursor cursor = getContentResolver().query(selectedImageUri, projection, null, null, null);
+//            Log.v(LOG_TAG, "query absolute path from uri");
+//
+//            if (cursor != null) {
+//                int columnIndex = cursor.getColumnIndexOrThrow(projection[0]);
+//                cursor.moveToFirst();
+//                selectedImagePath = cursor.getString(columnIndex);
+//                cursor.close();
+//            }
+//
+//            if (selectedImagePath == null) {
+//                Log.v(LOG_TAG, "Path is null");
+//            }
+            mImageLink = selectedImageUri.toString();
         }
+        super.onActivityResult(reqCode, resCode, data);
     }
 }
