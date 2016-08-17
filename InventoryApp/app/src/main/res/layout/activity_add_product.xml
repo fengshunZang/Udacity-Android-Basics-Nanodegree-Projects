@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
+        android:hint="@string/hint_name"
         />
     <TextView
         style="@style/TextStyleInListView"
@@ -30,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
+        android:hint="@string/hint_price"
         />
     <TextView
         style="@style/TextStyleInListView"
@@ -41,6 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:hint="@string/hint_current_quantity"
         />
     <TextView
         style="@style/TextStyleInListView"
@@ -52,6 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:hint="@string/hint_sale_quantity"
         />
     <TextView
         style="@style/TextStyleInListView"
@@ -63,12 +67,15 @@
         android:inputType="textEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/hint_email"
         />
     <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
+            style="?android:attr/buttonBarButtonStyle"
             android:id="@+id/button_add_image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -76,14 +83,12 @@
             android:layout_gravity="center"
             android:text="@string/button_add_image"/>
         <Button
+            style="?android:attr/buttonBarButtonStyle"
             android:id="@+id/button_addProductIntoDB"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
             android:text="@string/button_add_into_db"/>
-
     </LinearLayout>
-
-
 </LinearLayout>

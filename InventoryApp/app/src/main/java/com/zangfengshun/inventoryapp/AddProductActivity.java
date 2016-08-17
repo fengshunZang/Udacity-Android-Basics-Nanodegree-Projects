@@ -1,16 +1,8 @@
 package com.zangfengshun.inventoryapp;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -67,7 +59,6 @@ public class AddProductActivity extends AppCompatActivity {
                     intent.addCategory(Intent.CATEGORY_OPENABLE);
                 }
 
-                //checkWriteToExternalPerms();
                 intent.setType("image/*");
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
                 Log.v("AddProductActivity", "get image");
@@ -78,42 +69,61 @@ public class AddProductActivity extends AppCompatActivity {
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mName = name.getText().toString();
-                mPrice = Double.valueOf(price.getText().toString());
-                mCurrentQuantity = Integer.valueOf(currentQuantity.getText().toString());
-                mSaleQuantity = Integer.valueOf(saleQuantity.getText().toString());
-                mEmail = supplierEmail.getText().toString();
-                mProduct = new Product(mName, mPrice, mCurrentQuantity, mSaleQuantity, mImageLink, mEmail);
+                if (checkBlank(name)) {
+                    Toast toast = Toast.makeText(AddProductActivity.this, "Please add the name of the product.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                } else {
+                    mName = name.getText().toString();
+                }
 
-                Log.v(LOG_TAG, "Prepare to set data to a product object");
+                if (checkBlank(price) && !checkIsFloat(price)) {
+                    Toast toast = Toast.makeText(AddProductActivity.this, "Please add the unit price of the product.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                } else {
+                    mPrice = Double.valueOf(price.getText().toString());
+                }
 
-//                if (mProduct.getImageLink() == null) {
-//                    Toast toast = Toast.makeText(AddProductActivity.this, "Please add image.", Toast.LENGTH_SHORT);
-//                    toast.show();
-//                    mDbHelper.addProductEntry(mProduct);
-//                } else {
-//                    mDbHelper.addProductEntry(mProduct);
-//                }
-                mDbHelper.addProductEntry(mProduct);
+                //The initial figure of current/sale quantity could be zero, so the notice toast is not required.
+                if (checkBlank(currentQuantity) && !checkIsInteger(currentQuantity)) {
+                    Toast toast = Toast.makeText(AddProductActivity.this, "Please add the current quantity of the product.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                } else {
+                    mCurrentQuantity = Integer.valueOf(currentQuantity.getText().toString());
+                }
+
+                if (checkBlank(saleQuantity) && !checkIsInteger(saleQuantity)) {
+                    Toast toast = Toast.makeText(AddProductActivity.this, "Please add the sold quantity of the product.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                } else {
+                    mSaleQuantity = Integer.valueOf(saleQuantity.getText().toString());
+                }
+
+                if (checkBlank(supplierEmail)) {
+                    Toast toast = Toast.makeText(AddProductActivity.this, "Please add an supplier's email address of the product.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                } else {
+                    mEmail = supplierEmail.getText().toString();
+                }
+
+                if (mImageLink == null) {
+                    Toast toast = Toast.makeText(AddProductActivity.this, "Please select a picture of the product from gallery.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                } else {
+                    mProduct = new Product(mName, mPrice, mCurrentQuantity, mSaleQuantity, mImageLink, mEmail);
+                    mDbHelper.addProductEntry(mProduct);
+                }
+
                 setResult(RESULT_OK, new Intent());
                 finish();
             }
         });
 
-    }
-
-    private void checkWriteToExternalPerms() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE},
-                        1);
-            } else {
-            }
-        } else {
-        }
     }
 
     @Override
@@ -122,27 +132,34 @@ public class AddProductActivity extends AppCompatActivity {
         Log.v(LOG_TAG, "received image data");
 
         if (resCode == RESULT_OK && reqCode == PICK_IMAGE_REQUEST && data != null && data.getData() != null) {
-            String selectedImagePath = null;
             Uri selectedImageUri = data.getData();
             Log.v(LOG_TAG, "received image uri");
 
-//            String[] projection = {MediaStore.Images.Media.DATA};
-//
-//            Cursor cursor = getContentResolver().query(selectedImageUri, projection, null, null, null);
-//            Log.v(LOG_TAG, "query absolute path from uri");
-//
-//            if (cursor != null) {
-//                int columnIndex = cursor.getColumnIndexOrThrow(projection[0]);
-//                cursor.moveToFirst();
-//                selectedImagePath = cursor.getString(columnIndex);
-//                cursor.close();
-//            }
-//
-//            if (selectedImagePath == null) {
-//                Log.v(LOG_TAG, "Path is null");
-//            }
+            //The uri information is stored in every product item.
             mImageLink = selectedImageUri.toString();
         }
         super.onActivityResult(reqCode, resCode, data);
+    }
+
+    public boolean checkBlank(EditText words) {
+        return words.getText().toString().trim().length() == 0;
+    }
+
+    public boolean checkIsFloat(EditText words) {
+        try {
+            Float.parseFloat(words.getText().toString());
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    public boolean checkIsInteger(EditText words) {
+        try {
+            Integer.parseInt(words.getText().toString());
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 }

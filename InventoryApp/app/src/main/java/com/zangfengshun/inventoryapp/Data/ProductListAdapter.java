@@ -17,6 +17,7 @@ import java.util.List;
  * Created by Zang on 2016-08-08.
  */
 public class ProductListAdapter extends ArrayAdapter<Product>{
+    private ProductDbHelper mDbHelper = new ProductDbHelper(getContext());
     public ProductListAdapter(Context context, ArrayList<Product> objects) {
         super(context, 0, objects);
     }
@@ -29,7 +30,7 @@ public class ProductListAdapter extends ArrayAdapter<Product>{
             listView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
 
-        Product currentProduct = getItem(position);
+        final Product currentProduct = getItem(position);
 
         TextView name = (TextView)listView.findViewById(R.id.name_list_item);
         name.setText(currentProduct.getName());
@@ -42,6 +43,22 @@ public class ProductListAdapter extends ArrayAdapter<Product>{
 
         TextView saleQuantity = (TextView)listView.findViewById(R.id.sale_quantity_list_item);
         saleQuantity.setText(String.valueOf(currentProduct.getSaleQuantity()));
+
+        Button buttonSold = (Button)listView.findViewById(R.id.button_sold);
+        buttonSold.setFocusable(false);
+        buttonSold.setFocusableInTouchMode(false);
+        buttonSold.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (currentProduct.getCurrentQuantity() == 0 ) {
+                    return;
+                }
+                mDbHelper.updateProductQuantityAfterSelling(currentProduct, 1);
+                currentProduct.setSaleQuantity(currentProduct.getSaleQuantity() + 1);
+                currentProduct.setCurrentQuantity(currentProduct.getCurrentQuantity() - 1);
+                notifyDataSetChanged();
+            }
+        });
 
         return listView;
     }

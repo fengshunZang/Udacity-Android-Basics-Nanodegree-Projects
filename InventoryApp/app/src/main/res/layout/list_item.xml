@@ -8,7 +8,8 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
         <TextView
@@ -28,7 +29,8 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="1.5"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
         <TextView
@@ -48,7 +50,8 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="2"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
         <TextView
@@ -68,8 +71,9 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_weight="1.8"
+        android:orientation="vertical"
+        android:layout_gravity="center">
 
         <TextView
             style="@style/TextStyleInListView"
@@ -84,4 +88,12 @@
             android:layout_height="wrap_content"
             tools:text="23" />
     </LinearLayout>
+    <Button
+        android:id="@+id/button_sold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.4"
+        android:layout_gravity="center"
+        android:text="@string/button_sold"
+        android:layout_margin="8dp"/>
 </LinearLayout>

@@ -1,16 +1,24 @@
 <resources>
     <string name="app_name">Inventory App</string>
-    <string name="display_message">Please hit ADD button to add your every first product item.</string>
+    <string name="display_message">Please hit ADD PRODUCT button to add your very first product item.</string>
     <string name="name_name">NAME</string>
     <string name="name_price">PRICE</string>
     <string name="name_current_quantity">CURRENT QUANTITY</string>
     <string name="name_sale_quantity">SALE QUANTITY</string>
     <string name="name_quantity_modify">QUANTITY MODIFIED: </string>
     <string name="name_supplier_email">SUPPLIER EMAIL</string>
+    <string name="button_add_product">ADD PRODUCT</string>
+    <string name="button_sold">SOLD</string>
     <string name="button_subtract">-</string>
     <string name="button_add">+</string>
     <string name="button_order">ORDER</string>
     <string name="button_delete">DELETE</string>
     <string name="button_add_image">ADD IMAGE</string>
     <string name="button_add_into_db">ADD PRODUCT</string>
+    <string name="explanation_modify_button">Click SUBTRACT button after selling a product\nClick ADD button after receiving a new product.</string>
+    <string name="hint_name">Enter the name.</string>
+    <string name="hint_price">Enter a decimal as the unit price.</string>
+    <string name="hint_current_quantity">Enter an integer as the current Quan.</string>
+    <string name="hint_sale_quantity">Enter an integer as the sale Quan.</string>
+    <string name="hint_email">Enter an email address of the supplier.</string>
 </resources>

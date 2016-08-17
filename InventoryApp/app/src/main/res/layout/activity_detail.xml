@@ -10,6 +10,7 @@
     tools:context="com.zangfengshun.inventoryapp.DetailActivity">
 
     <LinearLayout
+        android:id="@+id/group_message_and_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -25,79 +26,93 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name_name" />
+
             <TextView
                 android:id="@+id/name_detail"
                 style="@style/FigureStyleInListView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="@dimen/textview_height_list_item" />
+
             <TextView
                 style="@style/TextStyleInListView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name_price" />
+
             <TextView
                 android:id="@+id/price_detail"
                 style="@style/FigureStyleInListView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="@dimen/textview_height_list_item" />
+
             <TextView
                 style="@style/TextStyleInListView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name_current_quantity" />
+
             <TextView
                 android:id="@+id/current_quantity_detail"
                 style="@style/FigureStyleInListView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="@dimen/textview_height_list_item" />
+
             <TextView
                 style="@style/TextStyleInListView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name_sale_quantity" />
+
             <TextView
                 android:id="@+id/sale_quantity_detail"
                 style="@style/FigureStyleInListView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="@dimen/textview_height_list_item" />
+
             <TextView
                 style="@style/TextStyleInListView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name_quantity_modify" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/button_subtract"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/button_subtract"/>
+                    android:text="@string/button_subtract" />
+
                 <Button
                     android:id="@+id/button_add"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/button_add"/>
-
+                    android:text="@string/button_add" />
             </LinearLayout>
-
         </LinearLayout>
-
 
         <ImageView
             android:id="@+id/imageView_product"
             android:layout_width="0dp"
             android:layout_height="200dp"
-            android:layout_weight="1"
             android:layout_margin="@dimen/activity_horizontal_margin"
-            android:scaleType="centerCrop"
-            />
-
-
+            android:layout_weight="1"
+            android:scaleType="centerCrop" />
     </LinearLayout>
+
+    <TextView
+        style="@style/FigureStyleInListView"
+        android:layout_below="@id/group_message_and_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:text="@string/explanation_modify_button" />
 
     <LinearLayout
         android:layout_width="match_parent"

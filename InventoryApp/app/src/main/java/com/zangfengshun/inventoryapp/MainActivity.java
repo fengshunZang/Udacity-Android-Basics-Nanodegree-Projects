@@ -1,6 +1,5 @@
 package com.zangfengshun.inventoryapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,10 +9,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.facebook.stetho.DumperPluginsProvider;
-import com.facebook.stetho.Stetho;
-import com.facebook.stetho.dumpapp.DumperPlugin;
 import com.zangfengshun.inventoryapp.Data.Product;
 import com.zangfengshun.inventoryapp.Data.ProductDbHelper;
 import com.zangfengshun.inventoryapp.Data.ProductListAdapter;
@@ -34,11 +29,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Set adapter to the listView;
-        mListView = (ListView)findViewById(R.id.list_view);
+        mListView = (ListView) findViewById(R.id.list_view);
         mAdapter = new ProductListAdapter(MainActivity.this, mProductsList);
         mListView.setAdapter(mAdapter);
 
-        mDisplayMsg = (TextView)findViewById(R.id.display_message);
+        mDisplayMsg = (TextView) findViewById(R.id.display_message);
 
         if (mDbHelper.getProductCount() == 0) {
             mDisplayMsg.setVisibility(View.VISIBLE);
@@ -64,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Handle the add button click event.
-        Button addProduct = (Button)findViewById(R.id.add_product_button);
+        Button addProduct = (Button) findViewById(R.id.add_product_button);
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         mProductsList.addAll(mDbHelper.queryAllEntries());
         Log.v(LOG_TAG, "returning from add product activity.");
 
-        for (Product p: mProductsList) {
+        for (Product p : mProductsList) {
             Log.v(LOG_TAG, p.getName());
         }
 

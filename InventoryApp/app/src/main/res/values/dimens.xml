@@ -3,4 +3,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="textview_height_list_item">56dp</dimen>
+    <dimen name="listView_height">400dp</dimen>
 </resources>
