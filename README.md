@@ -25,3 +25,4 @@ Explicit intent
 Description: This project contains no UI components, instead it focuses on  how to design and implement a simple database.
 
 #Project 10 Inventory App 
+This is an app which can create, query, modify and delete information(including images from Gallery) of items. 
