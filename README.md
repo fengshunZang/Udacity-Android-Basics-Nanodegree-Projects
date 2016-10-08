@@ -14,12 +14,22 @@ Requirement: Create the structure of an app to play music for a user and build i
 Explicit intent
 
 #Project 5 Report Card
+- created the structure of a ReportCard Java Class which allows a school to store a student's grades for a particular year
+- contained a single java class rather than a full Android app
+- stored student information in an array
 
 #Project 6 Tour Guide App
+- developed a tour guide app which presents relevant information, eg. attractions/restaurants/events, to a user who's visiting my city
+- created custom lists of items using ListView and ArrayListAdapter
+- navigated between those lists using intents and multiple Activities
+- properly handled images
 
 #Project 7 Book Listing App
 
 #Project 8 News App
+- developed a news feed app to give users regularly-updated news from the internet related to a particular topic
+- connected to an open news API and parsed JSON file to needed data under the implementation of AsyncTask
+- handled error cases properly
 
 #Project 9 Habit Tracker App
 Description: This project contains no UI components, instead it focuses on  how to design and implement a simple database.
