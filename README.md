@@ -25,6 +25,9 @@ Explicit intent
 - properly handled images
 
 #Project 7 Book Listing App
+- created the structure of a Book Listing app which allows a user to get a list of published books on a given topic
+- fetched data after parsing JSON responses by google books api
+- used AsyncTask
 
 #Project 8 News App
 - developed a news feed app to give users regularly-updated news from the internet related to a particular topic
@@ -32,7 +35,8 @@ Explicit intent
 - handled error cases properly
 
 #Project 9 Habit Tracker App
-Description: This project contains no UI components, instead it focuses on  how to design and implement a simple database.
+This project contains no UI components, instead it focuses on  how to design and implement a simple database.
 
 #Project 10 Inventory App 
-This is an app which can create, query, modify and delete information(including images from Gallery) of items. 
+- this is an app which can create, query, modify and delete information(including images from Gallery) of items 
+- implemented DB Contract, SQLiteHelper and ContentProvider to link with SQLite database
